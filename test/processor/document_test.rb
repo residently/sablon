@@ -165,6 +165,10 @@ class ProcessorDocumentTest < Sablon::TestCase
     document
   end
 
+  def test_get_tags
+    assert_equal 193, @processor.get_the_tags(wrap(snippet("all_the_tags"))).length
+  end
+
   def test_context_can_contain_string_and_symbol_keys
     context = {"first_name" => "Jack", last_name: "Davis"}
     result = process(snippet("simple_fields"), context)
