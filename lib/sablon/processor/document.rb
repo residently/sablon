@@ -61,6 +61,11 @@ module Sablon
         processor.manipulate xml_node, env
       end
 
+      def self.get_the_tags(xml_node)
+        processor = new(parser)
+        processor.get_tags(xml_node).map(&:expr).map(&:name)
+      end
+
       def self.parser
         @parser ||= Sablon::Parser::MailMerge.new
       end
@@ -76,6 +81,10 @@ module Sablon
         end
         cleanup(xml_node)
         xml_node
+      end
+
+      def get_tags(xml_node)
+        build_operations(@parser.parse_fields(xml_node))
       end
 
       private
