@@ -63,7 +63,7 @@ module Sablon
 
       def self.get_the_tags(xml_node)
         processor = new(parser)
-        processor.get_tags(xml_node).map(&:expr).map(&:name)
+        processor.get_tags(xml_node).map(&:name)
       end
 
       def self.parser
@@ -84,7 +84,7 @@ module Sablon
       end
 
       def get_tags(xml_node)
-        build_operations(@parser.parse_fields(xml_node))
+        @parser.parse_fields(xml_node).map(&:expression).uniq
       end
 
       private
