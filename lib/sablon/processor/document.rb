@@ -63,7 +63,7 @@ module Sablon
 
       def self.get_the_tags(xml_node)
         processor = new(parser)
-        processor.get_tags(xml_node).map(&:expr).map(&:name)
+        processor.get_tags(xml_node)
       end
 
       def self.parser
@@ -84,7 +84,7 @@ module Sablon
       end
 
       def get_tags(xml_node)
-        build_operations(@parser.parse_fields(xml_node))
+        @parser.parse_fields(xml_node).map(&:expression).uniq
       end
 
       private
@@ -108,11 +108,11 @@ module Sablon
       end
 
       # register "builtin" handlers
-      register_field_handler :insertion, InsertionHandler.new
       register_field_handler :each_loop, EachLoopHandler.new
       register_field_handler :conditional, ConditionalHandler.new
       register_field_handler :image, ImageHandler.new
       register_field_handler :comment, CommentHandler.new
+      register_field_handler :insertion, InsertionHandler.new
     end
   end
 end
