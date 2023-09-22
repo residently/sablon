@@ -84,7 +84,7 @@ module Sablon
       end
 
       def get_tags(xml_node)
-        @parser.parse_fields(xml_node).map(&:expression).uniq
+        @parser.parse_fields(xml_node).map(&:expression)
       end
 
       private
